@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>¡Baby Shower de Bebé! 🍼✨ - Invitación Web</title>
+  
+  <!-- OpenGraph Metadata for Social Networks & WhatsApp Preview -->
+  <meta property="og:title" content="¡Estás invitado al Baby Shower de Bebé! 🍼✨">
+  <meta property="og:description" content="Acompáñanos a celebrar la pronta llegada de nuestro bebé. Toca aquí para ver los detalles, ubicación y confirmar tu asistencia.">
+  <meta property="og:image" content="https://placehold.co/600x600/f4ede2/4a3b32?text=Bebé+%F0%9F%91%B6">
+  <meta property="og:type" content="website">
+
+  <!-- Tailwind CSS CDN for modern utilities -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Sacramento&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #fdfbf7 0%, #f4ede2 50%, #eae2d6 100%);
+      --primary-color: #b5835d;
+      --primary-hover: #9c6c48;
+      --secondary-color: #8c6a51;
+      --accent-color: #d4a373;
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --card-border: rgba(212, 163, 115, 0.25);
+      --text-main: #4a3b32;
+      --text-muted: #7d6b5d;
+      --envelope-bg: #f5eedf;
+      --envelope-flap: #e8dccb;
+      --seal-color: #d4a373;
+    }
+
+    [data-theme="boy"] {
+      --bg-gradient: linear-gradient(135deg, #f0f7ff 0%, #e1effe 50%, #d0e4ff 100%);
+      --primary-color: #4a80ec;
+      --primary-hover: #3366cc;
+      --secondary-color: #2b5cb8;
+      --accent-color: #79a6ff;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --card-border: rgba(121, 166, 255, 0.3);
+      --text-main: #1e3a6d;
+      --text-muted: #486581;
+      --envelope-bg: #e6f0fa;
+      --envelope-flap: #d2e4f7;
+      --seal-color: #4a80ec;
+    }
+
+    [data-theme="girl"] {
+      --bg-gradient: linear-gradient(135deg, #fff0f5 0%, #fde2e4 50%, #f7cad0 100%);
+      --primary-color: #e06d88;
+      --primary-hover: #c9526e;
+      --secondary-color: #b33955;
+      --accent-color: #f497ab;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --card-border: rgba(244, 151, 171, 0.3);
+      --text-main: #5c2231;
+      --text-muted: #824453;
+      --envelope-bg: #fae4eb;
+      --envelope-flap: #f3cfdb;
+      --seal-color: #e06d88;
+    }
+
+    [data-theme="sage"] {
+      --bg-gradient: linear-gradient(135deg, #f3f7f0 0%, #e5ede0 50%, #d4e0ce 100%);
+      --primary-color: #6b8e63;
+      --primary-hover: #54724d;
+      --secondary-color: #435e3c;
+      --accent-color: #92b489;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --card-border: rgba(146, 180, 137, 0.3);
+      --text-main: #2d3b2a;
+      --text-muted: #53634f;
+      --envelope-bg: #e8f0e5;
+      --envelope-flap: #d7e4d3;
+      --seal-color: #6b8e63;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-gradient);
+      min-height: 100vh;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--text-main);
+      background: var(--bg-gradient);
+      transition: background 0.5s ease;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .font-cormorant { font-family: 'Cormorant Garamond', serif; }
+    .font-sacramento { font-family: 'Sacramento', cursive; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .hero-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes floatBear {
+      0%, 100% { transform: translateY(0) rotate(-6deg); }
+      50% { transform: translateY(-10px) rotate(-2deg); }
+    }
+
+    .bear-float {
+      animation: floatBear 3s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 10px rgba(181, 131, 93, 0.2); }
+      100% { box-shadow: 0 0 25px var(--primary-color); }
+    }
+
+    .audio-pulsing {
+      animation: pulseGlow 2s infinite alternate;
+    }
+  </style>
+</head>
+<body data-theme="boho">
+
+  <canvas id="particles-canvas" class="fixed inset-0 pointer-events-none z-1"></canvas>
+
+  <button id="audioToggle" class="fixed bottom-5 right-5 z-40 w-12 h-12 rounded-full bg-white/90 backdrop-blur-md border border-amber-200 shadow-xl flex items-center justify-center text-xl cursor-pointer transition-transform active:scale-90" style="color: var(--primary-color);" aria-label="Reproducir música">
+    🎵
+  </button>
+
+  <div id="envelopeOverlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-5 transition-all duration-700" style="background: var(--bg-gradient);">
+    <div class="text-6xl bear-float mb-2" style="filter: drop-shadow(0 6px 6px rgba(0,0,0,0.15));"><image src="https://lh3.googleusercontent.com/d/1G4eNMC76GX_sMp3pkjJl8M6puMRbe4-L" alt="Foto pase personal" class="w-full h-[150px] object-cover rounded-sm"></div>
+    <div id="envelopeCard" class="w-full max-w-[380px] h-[270px] relative rounded-2xl shadow-2xl flex flex-col items-center justify-center cursor-pointer transition-transform hover:-translate-y-1" style="background: var(--envelope-bg);">
+      <div class="absolute top-0 left-0 w-full h-[140px] rounded-t-2xl transition-transform duration-700 origin-top z-30" style="background: var(--envelope-flap); clip-path: polygon(0 0, 100% 0, 50% 100%);"></div>
+      
+      <button id="sealBtn" class="absolute z-40 w-20 h-20 rounded-full text-white flex flex-col items-center justify-center shadow-lg border-2 border-white/70 font-cormorant text-xs font-bold tracking-widest uppercase transition-transform active:scale-95" style="background: var(--seal-color);">
+        <svg class="w-5 h-5 mb-0.5 fill-current" viewBox="0 0 24 24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        ABRIR
+      </button>
+
+      <div class="mt-16 text-center z-20 font-cormorant">
+        <h3 class="text-2xl font-semibold"></h3>
+        <p class="text-sm mt-1" style="color: var(--text-muted);"></p>
+      </div>
+    </div>
+    <div class="flex items-center justify-center gap-4 mt-6">
+      <div class="bg-white p-2 pb-4 rounded-md shadow-lg -rotate-6" style="width: 150px;">
+        <img src="https://lh3.googleusercontent.com/d/13whNp_KCpUI2sdOieebAnvmI4Vru2tYx" alt="Foto pase personal" class="w-full h-[150px] object-cover rounded-sm">
+      </div>
+      <div class="w-28 h-28 rounded-full flex items-center justify-center text-center shadow-lg border-2 border-white/70 rotate-3" style="background: var(--seal-color);">
+        <span class="font-cormorant text-white text-base font-bold uppercase leading-tight px-1">Pase<br>Personal</span>
+      </div>
+    </div>
+    <p class="text-xs mt-4 opacity-80">Toca el sello para abrir la invitación</p>
+  </div>
+
+  <div class="w-full max-w-[480px] min-h-screen relative z-10 pb-16 shadow-2xl bg-transparent">
+    
+    
+
+    <div class="px-5">
+      
+      <section class="text-center pt-5 pb-8">
+        <div class="inline-block px-5 py-1.5 rounded-full backdrop-blur-md border border-amber-200/50 text-xs font-semibold tracking-widest uppercase mb-4 shadow-sm" style="background: var(--card-bg); color: var(--primary-color);">
+          ✨ ¡NUESTRA GRAN ALEGRÍA! ✨
+        </div>
+        
+        <div class="w-[210px] h-[210px] mx-auto mb-6 rounded-full p-2 bg-white/60 border-2 border-dashed shadow-lg hero-float" style="border-color: var(--accent-color);">
+          
+           <img src="https://lh3.googleusercontent.com/d/1YhWRZxr_dYYxjklVDHXzg4IwkmYAgmaL" alt="Baby Shower Bebé" class="w-full h-full rounded-full object-cover">
+        </div>
+
+        <h1 class="font-sacramento text-6xl leading-none mb-1" style="color: var(--primary-color);">Bebé</h1>
+        <h2 class="font-cormorant text-2xl font-semibold tracking-wide">¡BABY SHOWER!</h2>
+        
+        <p class="text-xs mt-3" style="color: var(--text-muted);">
+          Con la bendición de sus papás:<br>
+          <span class="font-semibold" style="color: var(--text-main);">Leslie Gómez & Aaron Torres </span>
+        </p>
+      </section>
+
+      <section class="backdrop-blur-md rounded-3xl p-6 mb-6 shadow-xl border" style="background: var(--card-bg); border-color: var(--card-border);">
+        <div class="text-center mb-4">
+          <h2 class="font-cormorant text-2xl font-bold flex items-center justify-center gap-2" style="color: var(--primary-color);">
+            Faltan Muy Pocos Días
+          </h2>
+          <p class="text-xs mt-1" style="color: var(--text-muted);">La cuenta regresiva para el gran día</p>
+        </div>
+        
+        <div class="grid grid-cols-4 gap-2 text-center">
+          <div class="bg-white/90 rounded-xl p-3 border shadow-sm" style="border-color: var(--card-border);">
+            <div id="days" class="text-xl font-bold" style="color: var(--primary-color);">00</div>
+            <div class="text-[10px] uppercase tracking-wider mt-1 font-medium" style="color: var(--text-muted);">Días</div>
+          </div>
+          <div class="bg-white/90 rounded-xl p-3 border shadow-sm" style="border-color: var(--card-border);">
+            <div id="hours" class="text-xl font-bold" style="color: var(--primary-color);">00</div>
+            <div class="text-[10px] uppercase tracking-wider mt-1 font-medium" style="color: var(--text-muted);">Horas</div>
+          </div>
+          <div class="bg-white/90 rounded-xl p-3 border shadow-sm" style="border-color: var(--card-border);">
+            <div id="minutes" class="text-xl font-bold" style="color: var(--primary-color);">00</div>
+            <div class="text-[10px] uppercase tracking-wider mt-1 font-medium" style="color: var(--text-muted);">Min.</div>
+          </div>
+          <div class="bg-white/90 rounded-xl p-3 border shadow-sm" style="border-color: var(--card-border);">
+            <div id="seconds" class="text-xl font-bold" style="color: var(--primary-color);">00</div>
+            <div class="text-[10px] uppercase tracking-wider mt-1 font-medium" style="color: var(--text-muted);">Seg.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="backdrop-blur-md rounded-3xl p-6 mb-6 shadow-xl border" style="background: var(--card-bg); border-color: var(--card-border);">
+        <div class="text-center mb-5">
+          <h2 class="font-cormorant text-2xl font-bold" style="color: var(--primary-color);">¿Cuándo y Dónde?</h2>
+          <p class="text-xs mt-1" style="color: var(--text-muted);">Queremos compartir este momento contigo</p>
+        </div>
+ 
+        <div class="flex items-start gap-4 py-3 border-b border-dashed" style="border-color: var(--card-border);">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg flex-shrink-0 bg-amber-500/10" style="color: var(--primary-color);">📆</div>
+          <div>
+            <h3 class="text-sm font-semibold">Fecha y Hora</h3>
+            <p class="text-xs mt-0.5 leading-relaxed" style="color: var(--text-muted);">Sábado, 7 de Noviembre de 2026<br>A partir de las 2:30 PM</p>
+          </div>
+        </div>
+ 
+        <div class="flex items-start gap-4 py-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg flex-shrink-0 bg-amber-500/10" style="color: var(--primary-color);">📍</div>
+          <div>
+            <h3 class="text-sm font-semibold">Ubicación del Evento</h3>
+            <p class="text-xs mt-0.5 leading-relaxed" style="color: var(--text-muted);"><strong>Los Pinos de Cholula</strong><br></p>
+          </div>
+        </div>
+ 
+        <div class="mt-4 rounded-2xl overflow-hidden border shadow-sm" style="border-color: var(--card-border);">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.9395146032643!2d-98.3197634!3d19.066396800000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cfc899e414a493%3A0x67dae08ae8e33f78!2sLos%20Pinos%20de%20Cholula!5e0!3m2!1ses-419!2smx!4v1789840867844!5m2!1ses-419!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+ 
+        <div class="grid grid-cols-2 gap-3 mt-3">
+          <a href="https://maps.app.goo.gl/3sD8r21otH7CeF5q6" target="_blank" class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-full text-xs font-semibold text-white shadow-sm transition-transform hover:-translate-y-0.5" style="background: var(--primary-color);">
+           Google Maps
+          </a>
+          <a href="https://maps.app.goo.gl/3sD8r21otH7CeF5q6" target="_blank" class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-full text-xs font-semibold bg-white/90 border shadow-sm transition-transform hover:-translate-y-0.5" style="border-color: var(--card-border);">
+            Waze
+          </a>
+          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Baby+Shower+Bebe&dates=20261107T143000/20261107T193000&details=Baby+Shower&location=Av. 3 Pte. 1508, San Cristobal Tepontla, 72760 San Pedro Cholula, Pue." target="_blank" class="col-span-2 flex items-center justify-center gap-2 py-2.5 px-4 rounded-full text-xs font-semibold bg-white/90 border shadow-sm transition-transform hover:-translate-y-0.5" style="border-color: var(--card-border);">
+            Agregar a Calendario
+          </a>
+        </div>
+      </section>
+
+
+      <section class="backdrop-blur-md rounded-3xl p-6 mb-6 shadow-xl border" style="background: var(--card-bg); border-color: var(--card-border);">
+        <div class="text-center mb-5">
+          <h2 class="font-cormorant text-2xl font-bold" style="color: var(--primary-color);">Mesa de Regalos</h2>
+          <p class="text-xs mt-1" style="color: var(--text-muted);">Tu presencia es nuestro mejor regalo</p>
+        </div>
+
+        
+
+        <div class="flex items-center justify-between p-3.5 bg-white/90 rounded-2xl border mb-3 shadow-sm transition-transform hover:scale-[1.01]" style="border-color: var(--card-border);">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🛍️</span>
+            <div>
+              <h4 class="text-xs font-semibold">Mesa Liverpool</h4>
+              <p class="text-[11px]" style="color: var(--text-muted);">Evento No: <strong>60024470</strong></p>
+            </div>
+          </div>
+          <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/60024470" target="_blank" class="py-1.5 px-3 rounded-full text-xs font-semibold bg-white border shadow-sm" style="border-color: var(--card-border); color: var(--text-main);">
+            Ir a Tienda
+          </a>
+        </div>
+
+        
+      </section>
+
+      <section class="backdrop-blur-md rounded-3xl p-6 mb-6 shadow-xl border" style="background: var(--card-bg); border-color: var(--card-border);">
+        <div class="text-center mb-5">
+          <h2 class="font-cormorant text-2xl font-bold" style="color: var(--primary-color);">Confirmación</h2>
+          <p class="text-xs mt-1" style="color: var(--text-muted);">Por favor confirma antes del 10 de Octubre</p>
+        </div>
+
+        <form id="rsvpForm" class="space-y-4">
+          <div>
+            <label for="guestName" class="block text-xs font-semibold mb-1">Nombre Completo *</label>
+            <input type="text" id="guestName" class="w-full px-4 py-2.5 rounded-xl border bg-white/95 text-xs outline-none transition-all focus:ring-2" style="border-color: var(--card-border);" placeholder="Ej. Ana María Pérez" required>
+          </div>
+
+          <div>
+            <label for="attendanceSelect" class="block text-xs font-semibold mb-1">¿Nos acompañarás? *</label>
+            <select id="attendanceSelect" class="w-full px-4 py-2.5 rounded-xl border bg-white/95 text-xs outline-none transition-all" style="border-color: var(--card-border);">
+              <option value="si">¡Sí, ahí estaré celebrando! 🎉</option>
+              <option value="no">Lo siento, no podré asistir 💔</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="passesSelect" class="block text-xs font-semibold mb-1">Número de Pases Confirmados</label>
+            <select id="passesSelect" class="w-full px-4 py-2.5 rounded-xl border bg-white/95 text-xs outline-none transition-all" style="border-color: var(--card-border);">
+              <option value="1 pase">1 Persona</option>
+              <option value="2 pases">2 Personas</option>
+              <option value="3 pases">3 Personas</option>
+              <option value="4 pases">Familia (4 pases)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="guestMessage" class="block text-xs font-semibold mb-1">Mensaje para el bebé o papás (Opcional)</label>
+            <textarea id="guestMessage" rows="3" class="w-full px-4 py-2.5 rounded-xl border bg-white/95 text-xs outline-none transition-all resize-none" style="border-color: var(--card-border);" placeholder="Escribe unos palabras..."></textarea>
+          </div>
+
+          <button type="submit" class="w-full py-3.5 rounded-full text-xs font-semibold text-white shadow-md transition-transform hover:-translate-y-0.5 active:scale-95" style="background: var(--primary-color);">
+          Confirmar por WhatsApp
+          </button>
+        </form>
+      </section>
+
+      <footer class="text-center pt-2 pb-6 text-xs" style="color: var(--text-muted);">
+        <p>¡Esperamos verte pronto! 💕<br><span class="font-semibold" style="color: var(--primary-color);">Leslie & Aaron</span></p>
+      </footer>
+
+    </div>
+  </div>
+
+  <div id="galleryModal" class="fixed inset-0 z-50 bg-black/85 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <span id="modalClose" class="absolute top-5 right-6 text-white text-3xl cursor-pointer">&times;</span>
+    <div class="max-w-[90%] max-h-[80vh] rounded-2xl overflow-hidden">
+      <img id="modalImg" src="" alt="Vista ampliada" class="w-full h-full object-contain">
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Target Event Date: Sábado 7 de Noviembre de 2026, 2:30 PM
+      const targetDate = new Date(2026, 10, 7, 14, 30, 0);
+
+      // WhatsApp Host Number
+      const hostWhatsAppNumber = "5536750364";
+
+      // 2. Envelope Opener Logic
+      const envelopeOverlay = document.getElementById('envelopeOverlay');
+      const envelopeCard = document.getElementById('envelopeCard');
+      const sealBtn = document.getElementById('sealBtn');
+
+      if (sealBtn && envelopeOverlay) {
+        const openEnvelope = () => {
+          envelopeCard.style.transform = 'translateY(-10px)';
+          setTimeout(() => {
+            envelopeOverlay.style.opacity = '0';
+            envelopeOverlay.style.pointerEvents = 'none';
+            triggerConfetti();
+          }, 400);
+        };
+        sealBtn.addEventListener('click', openEnvelope);
+        envelopeCard.addEventListener('click', openEnvelope);
+      }
+
+      // 3. Countdown Timer Logic
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate.getTime() - now;
+
+        if (distance < 0) {
+          document.getElementById('days').innerText = "00";
+          document.getElementById('hours').innerText = "00";
+          document.getElementById('minutes').innerText = "00";
+          document.getElementById('seconds').innerText = "00";
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = String(days).padStart(2, '0');
+        document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+        document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+      }
+
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+
+      // 4. Theme Switcher Logic
+      const themePills = document.querySelectorAll('[data-theme-val]');
+      themePills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          const theme = pill.getAttribute('data-theme-val');
+          document.body.setAttribute('data-theme', theme);
+        });
+      });
+
+      // 5. RSVP WhatsApp Form Generator
+      const rsvpForm = document.getElementById('rsvpForm');
+      if (rsvpForm) {
+        rsvpForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const guestName = document.getElementById('guestName').value.trim();
+          const attendance = document.getElementById('attendanceSelect').value;
+          const passes = document.getElementById('passesSelect').value;
+          const message = document.getElementById('guestMessage').value.trim();
+
+          if (!guestName) return;
+
+          let text = `¡Hola! Confirmación para el Baby Shower\n\n`;
+          text += `*Nombre:* ${guestName}\n`;
+          text += `*Asistencia:* ${attendance === 'si' ? '¡Sí, ahí estaré con gusto!' : 'Lo siento, no podré asistir'}\n`;
+          
+          if (attendance === 'si') {
+            text += `*Lugares confirmados:* ${passes}\n`;
+          }
+          if (message) {
+            text += `*Mensaje:* ${message}\n`;
+          }
+
+          window.open(`https://wa.me/${hostWhatsAppNumber}?text=${encodeURIComponent(text)}`, '_blank');
+        });
+      }
+
+      // 6. Lightbox Modal Gallery
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      const modalOverlay = document.getElementById('galleryModal');
+      const modalImg = document.getElementById('modalImg');
+      const modalClose = document.getElementById('modalClose');
+
+      galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+          modalImg.src = item.querySelector('img').src;
+          modalOverlay.style.opacity = '1';
+          modalOverlay.style.pointerEvents = 'auto';
+        });
+      });
+
+      if (modalClose) {
+        modalClose.addEventListener('click', () => {
+          modalOverlay.style.opacity = '0';
+          modalOverlay.style.pointerEvents = 'none';
+        });
+      }
+
+      if (modalOverlay) {
+        modalOverlay.addEventListener('click', (e) => {
+          if (e.target === modalOverlay) {
+            modalOverlay.style.opacity = '0';
+            modalOverlay.style.pointerEvents = 'none';
+          }
+        });
+      }
+
+      // 7. YouTube Hidden Background Music Player
+      let isPlaying = false;
+      let ytPlayer = null;
+      let ytReady = false;
+      let pendingPlay = false;
+      const audioBtn = document.getElementById('audioToggle');
+      const ytVideoId = 'eYZ3jL2LAt4'; // IndiviDúo | Ecografía (Video Oficial)
+
+      const ytPlaceholder = document.createElement('div');
+      ytPlaceholder.id = 'ytAudioPlayer';
+      ytPlaceholder.style.cssText = 'position:fixed;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;top:-9999px;left:-9999px;';
+      document.body.appendChild(ytPlaceholder);
+
+      const ytApiScript = document.createElement('script');
+      ytApiScript.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(ytApiScript);
+
+      window.onYouTubeIframeAPIReady = () => {
+        ytPlayer = new YT.Player('ytAudioPlayer', {
+          height: '1',
+          width: '1',
+          videoId: ytVideoId,
+          playerVars: {
+            autoplay: 0,
+            controls: 0,
+            disablekb: 1,
+            fs: 0,
+            modestbranding: 1,
+            loop: 1,
+            playlist: ytVideoId
+          },
+          events: {
+            onReady: () => {
+              ytReady = true;
+              if (pendingPlay) {
+                ytPlayer.playVideo();
+                pendingPlay = false;
+              }
+            }
+          }
+        });
+      };
+
+      if (audioBtn) {
+        audioBtn.addEventListener('click', () => {
+          if (isPlaying) {
+            if (ytPlayer && ytReady) ytPlayer.pauseVideo();
+            audioBtn.classList.remove('audio-pulsing');
+            audioBtn.innerHTML = '🎵';
+          } else {
+            if (ytReady) {
+              ytPlayer.playVideo();
+            } else {
+              pendingPlay = true;
+            }
+            audioBtn.classList.add('audio-pulsing');
+            audioBtn.innerHTML = '🔊';
+          }
+          isPlaying = !isPlaying;
+        });
+      }
+
+      // 8. Particle Canvas Animation
+      const canvas = document.getElementById('particles-canvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+          width = canvas.width = window.innerWidth;
+          height = canvas.height = window.innerHeight;
+        });
+
+        const particles = Array.from({ length: 20 }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 3 + 1,
+          speedY: Math.random() * 0.3 + 0.1,
+          opacity: Math.random() * 0.4 + 0.2
+        }));
+
+        function drawParticles() {
+          ctx.clearRect(0, 0, width, height);
+          particles.forEach(p => {
+            p.y -= p.speedY;
+            if (p.y < -10) {
+              p.y = height + 10;
+              p.x = Math.random() * width;
+            }
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fill();
+          });
+          requestAnimationFrame(drawParticles);
+        }
+        drawParticles();
+      }
+
+      // Confetti burst helper
+      function triggerConfetti() {
+        for (let i = 0; i < 35; i++) {
+          const conf = document.createElement('div');
+          conf.style.position = 'fixed';
+          conf.style.left = Math.random() * 100 + 'vw';
+          conf.style.top = '-10px';
+          conf.style.width = (Math.random() * 8 + 4) + 'px';
+          conf.style.height = (Math.random() * 8 + 4) + 'px';
+          conf.style.backgroundColor = ['#d4a373', '#4a80ec', '#e06d88', '#6b8e63'][Math.floor(Math.random() * 4)];
+          conf.style.borderRadius = '50%';
+          conf.style.zIndex = '1000';
+          conf.style.transition = 'all 2.2s ease-out';
+          document.body.appendChild(conf);
+
+          setTimeout(() => {
+            conf.style.transform = `translateY(${window.innerHeight + 20}px) rotate(${Math.random() * 720}deg)`;
+            conf.style.opacity = '0';
+          }, 30);
+
+          setTimeout(() => conf.remove(), 2300);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
